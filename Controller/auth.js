@@ -72,3 +72,8 @@ export const login = async(req,res)=>{
         res.status(401).json({message:'User with this user name is not in db'})
     }
 }
+
+export const logout = async(req,res)=>{
+    res.clearCookie('jwt');
+    res.status(200).json({message:'logout successfully'})
+}
