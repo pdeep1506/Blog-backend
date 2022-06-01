@@ -30,6 +30,8 @@ export const updateUser =  async(req,res)=>{
 export const getUser = async(req,res)=>{
     try{
         const user =await userModel.find({_id:req.params.id})
+        user[0].password = undefined
+        
         res.status(200).json(user)
     }
     catch(err){

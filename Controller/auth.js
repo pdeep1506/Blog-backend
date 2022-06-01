@@ -10,10 +10,10 @@ export const register = async(req,res,next)=>{
     const username = req.body.username
     const email = req.body.email
     const password = req.body.password
-    // console.log(username,email)
+  
     const exictinguserUser = await userModel.findOne({username})
     const exictinguserEmail = await userModel.findOne({email})
-    console.log(exictinguserUser,exictinguserEmail)
+    
     
     if(!exictinguserUser && !exictinguserEmail){
         try{
@@ -55,12 +55,13 @@ export const login = async(req,res)=>{
     if(exictinguser){
         const decryptPassword = bcryptjs.compareSync(password,exictinguser.password)
         if(decryptPassword){
-            const jwt = jsonwebtoken.sign({
-                id:exictinguser._id, isAdmin: exictinguser.isAdmin
+            const jwtSign = jsonwebtoken.sign({
+                id:exictinguser._id, email:exictinguser.email
             },process.env.JWT_KEY,{ 
                 expiresIn:'2d'
             })
-            res.cookie('jwt',jwt)
+            res.cookie('jwt',jwtSign)
+            
             res.status(200).json({message:'Login Successfully'})
         }
         else{
