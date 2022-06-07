@@ -9,12 +9,12 @@ export const updateUser =  async(req,res)=>{
             const password = bcryptjs.hashSync(req.body.password)
             const UserData = {...req.body,password}
             const updateUser = await userModel.findByIdAndUpdate(req.params.id,UserData)
-            res.status(200).json({message:'Update scuuessfully',})
+            res.status(200).json('Update scuuessfully')
         }
         else{
             try{
                 const updateUser = await userModel.findByIdAndUpdate(req.params.id,req.body)
-                res.status(200).json({message:'Update scuuessfully',})
+                res.status(200).json('Update scuuessfully')
             }
             catch(err){
                 res.status(500).json(err)
@@ -44,7 +44,7 @@ export const deleteUser = async(req,res)=>{
     try{
         const deleteUser = await userModel.findByIdAndDelete(req.params.id)
         const deletePost = await postModel.deleteMany({userid:req.params.id})
-        res.status(200).json({message:'Deleted user',deleteUser:deleteUser,deletePost:deletePost})
+        res.status(200).json('Deleted user')
     }
     catch(err){
         res.status(500).json(err)

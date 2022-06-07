@@ -14,9 +14,13 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    userid: {
+    username: {
       type: String,
       required: true,
+    },
+    nid:{
+      type:String,
+      required:true
     },
     categories: {
       type: Array,

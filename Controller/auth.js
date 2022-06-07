@@ -20,29 +20,29 @@ export const register = async(req,res,next)=>{
             const hashpassword = bcryptjs.hashSync(password)
             const user = {username:username,email:email,password:hashpassword}
             const createUser = await userModel.create(user)
-            res.status(201).json({message:'User created successfully', data: createUser})
+            res.status(201).json('User created successfully')
         }
         catch(err){
             console.log(err)
             if(err['keyPattern']['username'] === 1){
-                res.status(401).json({message:'User with this username is already in db'})
+                res.status(401).json('User with this username is already in db')
             }
             else if(err['keyPattern']['email'] === 1){
-                res.status(401).json({message:'User with this email is already in db 12'})
+                res.status(401).json('User with this email is already in db 12')
             }
             else{    
-                res.status(500).json({message:err})
+                res.status(500).json(err)
             }
         }
     }
     else if(exictinguserEmail && exictinguserUser){
-        res.status(401).json({message:'User with this email and username is already in db'})
+        res.status(401).json('User with this email and username is already in db')
     }
     else if(exictinguserUser){
-        res.status(401).json({message:'User with this username is already in db'})
+        res.status(401).json('User with this username is already in db')
     }
     else if(exictinguserEmail){
-        res.status(401).json({message:'User with this email is already in db'})
+        res.status(401).json('User with this email is already in db')
     }
 }
 
@@ -62,19 +62,19 @@ export const login = async(req,res)=>{
             })
             res.cookie('jwt',jwtSign)
             
-            res.status(200).json({message:'Login Successfully'})
+            res.status(200).json('Login Successfully')
         }
         else{
-            res.status(401).json({message:'Wrong credentials!'})
+            res.status(401).json('Wrong credentials!')
         }
         
     }
     else{
-        res.status(401).json({message:'User with this user name is not in db'})
+        res.status(401).json('User with this user name is not in db')
     }
 }
 
 export const logout = async(req,res)=>{
     res.clearCookie('jwt');
-    res.status(200).json({message:'logout successfully'})
+    res.status(200).json('logout successfully')
 }
