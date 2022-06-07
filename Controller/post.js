@@ -2,8 +2,24 @@ import postModel from "../db/models/post.js";
 
 import { nanoid } from "nanoid";
 export const getAllPost = async(req,res)=>{
+    const username = req.query.username
+    const category = req.query.category
     try{
-        const allData = await postModel.find();
+        let allData
+        if(username){
+            allData = await postModel.find({username});
+        }
+        else if(category){
+            allData = await postModel.find({
+                categories:{
+                    $in: [category]
+                }
+            })
+        }
+        else{
+
+            allData = await postModel.find();
+        }
         res.status(200).json(allData)
     }
     catch(err){
