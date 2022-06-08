@@ -1,6 +1,15 @@
 import postModel from "../db/models/post.js";
-
+import multer from "multer";
 import { nanoid } from "nanoid";
+
+
+
+
+
+
+
+
+
 export const getAllPost = async(req,res)=>{
     const username = req.query.username
     const category = req.query.category
