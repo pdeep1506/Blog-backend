@@ -62,7 +62,7 @@ export const login = async(req,res)=>{
             })
             res.cookie('jwt',jwtSign)
             
-            res.status(200).json('Login Successfully')
+            res.status(200).json(exictinguser)
         }
         else{
             res.status(401).json('Wrong credentials!')

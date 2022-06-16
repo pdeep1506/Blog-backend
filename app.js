@@ -6,9 +6,10 @@ import authRoute from './routes/auth.js'
 import userRoute from './routes/users.js'
 import categoryRoute from './routes/category.js'
 import postRoute from './routes/post.js'
+import cors from "cors";
 const port = process.env.PORT || 8000
 const app = express();
-
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())

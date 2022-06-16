@@ -9,7 +9,7 @@ export const updateUser =  async(req,res)=>{
             const password = bcryptjs.hashSync(req.body.password)
             const UserData = {...req.body,password}
             const updateUser = await userModel.findByIdAndUpdate(req.params.id,UserData)
-            res.status(200).json('Update scuuessfully')
+            res.status(200).json({data:updateUser})
         }
         else{
             try{
